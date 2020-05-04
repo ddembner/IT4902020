@@ -4,14 +4,11 @@
 require_once('rabbitMQLib.inc');
 
 function SendToLogger($message){
-	
+		
 	$client = new rabbitMQClient("testRabbitMQ.ini", "logServer");
-	//$request = array();
-	//$request['type'] = "fanout";
-	//$request['message'] = $argv[1];
-	//$response = $client->send_request($request);
-	//$response = $client->publish($request);
-	$client->publish($message, 30000);
+	$date = date_create('now', timezone_open('America/New_York'));	
+	$timeMessage = date_format($date, 'H:i:sa') . ':';
+	$client->publish($timeMessage . $message, 30000);
 }
 
 ?>

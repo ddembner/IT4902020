@@ -20,7 +20,9 @@ Class Client {
 		$request = array();
 		$request['username'] = $username;
 		$request['password'] = $pass;
-		$request['type'] = $sessionType;
+		$request['type'] = 'Database';
+		$request['queryType'] = 'insert';
+		$request['query'] = 'update login set loggedIn = 1 where username ='.$username.' and password ='.$pass.' and loggedIn = 0';
 		$request['message'] = $sessionType;
 
 		$response = $client->send_request($request);

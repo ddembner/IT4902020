@@ -16,7 +16,7 @@ function requestProcessor($request)
 		case 'select':
 			echo "Processing Data Query".PHP_EOL;
 			try{
-				$db = new mysqli("127.0.0.1", "david", "admin", "it490");
+				$db = new mysqli("10.0.1.40", "david", "admin", "it490");
 				print_r($request).PHP_EOL;
 				$query = $db->real_escape_string($request['query']);
 				$response = $db->query($query);
@@ -36,14 +36,14 @@ function requestProcessor($request)
 		case 'insert':
 			echo "Processing Data Query".PHP_EOL;
                         try{
-                                $db = new mysqli("127.0.0.1", "david", "admin", "it490");
+                                $db = new mysqli("10.0.1.40", "david", "admin", "it490");
                                 //print_r($request).PHP_EOL;
 				//$query = $db->real_escape_string($request['query']);
 				$query = $request['query'];
 				$response = $db->query($query);
 				var_dump($response);
-				if($response){
-					return $response;
+				if($db->affected_rows != 0){
+					return 1;
 				}
 				else{
 					return -1;
